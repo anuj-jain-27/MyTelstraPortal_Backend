@@ -35,5 +35,8 @@
   "description": "Telstra My Telstra Portal",
   "main": "server.js",
   "author": "Mayur Patil",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
 }

@@ -3,11 +3,11 @@
 
 const express = require('express');
 const router = express.Router();
-const {getPlanMessageById, getPlanMessage, getAllPlans, createPlan, createPlanNew} = require("../controllers/Plans")
+const {getPlanMessageById, getPlanMessage, getAllPlans, createPlanNew} = require("../controllers/Plans")
 const {getPostMessageById} = require("../controllers/posts")
 const {getUserById} = require("../controllers/user")
 const {getUserCardById} = require("../controllers/paymentcards")
-const {isAdmin,isAuthenticated,isSignedIn} = require("../controllers/auth")
+const {isAuthenticated,isSignedIn} = require("../controllers/auth")
 
 router.param("userId",getUserById)
 router.param("planid",getPlanMessageById)

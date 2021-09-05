@@ -3,7 +3,7 @@ const router = express.Router()
 
 const {getUserById,getUser,getAllUsers,userPurchaseList,updateUser} = require("../controllers/user")
 const {getCurrentBroadbandPlan,getBroadbandPaymentHistory} = require("../controllers/broadbandops")
-const {isSignedIn,isAuthenticated,isAdmin} = require("../controllers/auth")
+const {isSignedIn,isAuthenticated} = require("../controllers/auth")
 const {getAllUserCards,addUserCards} = require("../controllers/paymentcards")
 
 router.param("userId",getUserById)

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -59,4 +59,5 @@ app.use('/api', planRoutes);
 
 module.exports = app
 
-const API = 'http:localhost:3000/api/'
+// Changed to 8000
+//const API = 'http:localhost:3000/api/'

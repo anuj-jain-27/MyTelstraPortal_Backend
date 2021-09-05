@@ -23,7 +23,6 @@ passport.deserializeUser((id,done)=>{
    
 });
 
-var myemail ="",accesstoken = ""
 var myprofile = {}
 passport.use(
     new GoogleStrategy({
