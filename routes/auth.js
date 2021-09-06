@@ -1,15 +1,14 @@
 var express = require('express')
 const passport = require('passport')
 var router = express.Router()
-const {signout,signup,signin,isSignedIn} = require("../controllers/auth")
+const {signout,signup,testsignin,googleSignin,signin,isSignedIn} = require("../controllers/auth")
+// const accesstoken  = require('../controllers/auth')
 
 
-
-router.get("/testroute",isSignedIn,(req,res)=>{
-
-   // res.send("A protected route")
-   res.json(req.auth)
+router.get('/login',(req,res)=>{
+  res.redirect('/auth/google')
 })
+
 
 
 // const authCheck = (req, res, next) => {
@@ -59,12 +58,11 @@ router.get("/auth/google/profile",
 
 // For google auth
 router.get("/profile",signin)
-
+router.post('/googlesignin',googleSignin)
 router.get("/signout",signout)
 // router.post("/signup",signup)
 
 // router.post("/signin",signin)
-
 
 
 module.exports = router;

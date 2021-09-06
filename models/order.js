@@ -9,6 +9,7 @@ const productCartSchema  = new mongoose.Schema({
     name : String,
     count : Number,
     price : Number,
+    
 })
 
 const ProductCart = mongoose.model("ProductCart",productCartSchema)

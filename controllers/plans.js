@@ -156,3 +156,16 @@ exports.deletePlan = (req,res) => {
         })
     })
 }
+
+exports.getMobilePlanPaymentHistory =(req,res)=>{
+    PlanMessage.find({user : req.profile._id}).exec((err,plans)=>{
+        if(err){
+            console.log(err)
+            return res.status(404).json({
+                error : "Error While getting plans of user"
+            })
+        }
+        res.json(plans);
+    })
+}
+    

@@ -16,6 +16,7 @@ router.param("cardId",getUserCardById);
 
 
 
+
 // actual routes
 
 //CREATE 
@@ -30,7 +31,7 @@ router.get("/order/all/:userId",isSignedIn,isAuthenticated,isAdmin,getAllOrders)
 
 // Order status
 
-router.get("/order/status/:userId",isSignedIn,isAuthenticated,isAdmin,getOrderStatus)
+router.get("/order/status/:userId",getOrderStatus)//router.get("/order/status/:userId",isSignedIn,isAuthenticated,isAdmin,getOrderStatus)
 router.put("/order/:orderId/status/:userId",isSignedIn,isAuthenticated,isAdmin,updateStatus)
 
 module.exports = router;

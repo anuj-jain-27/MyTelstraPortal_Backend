@@ -15,8 +15,10 @@ const paymentcards = new mongoose.Schema({
     expirydate:{
         type:String,
         maxlength : 5
-    }
+    },
+    // 1 new field added
+    cardname:{
+        type:String
+    },
 })
-
-
 module.exports = mongoose.model("PaymentCard",paymentcards);

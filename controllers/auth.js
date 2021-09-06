@@ -23,6 +23,7 @@ passport.deserializeUser((id,done)=>{
    
 });
 
+var myemail ="",accesstoken = ""
 var myprofile = {}
 passport.use(
     new GoogleStrategy({
@@ -37,8 +38,8 @@ passport.use(
     },   function(accessToken, refreshToken, profile, done) {
         //check user table for anyone with a google ID of profile.id
          myprofile = profile
-        console.log(profile)
-        console.log(accessToken)
+        console.log("profile: ",profile)
+        console.log("access token",accessToken)
         User.findOne({
             'googleId': profile.id 
         }, function(err, user) {
@@ -119,42 +120,35 @@ exports.signup = (req,res)=>{
 //      return res.json({token,user : {_id,name,email,role}})
 //     })
 // }
+exports.googleSignin=async (req,res)=>{
+    const { googleId } = req.body;
+    const oldUser = await User.findOne({ googleId });
+    if (!oldUser) 
+      {
+          oldUser = await User.create(req.body);
+      }        
+    console.log(oldUser)
 
+    const token = jwt.sign({_id : oldUser._id},JWT_SECRET)
+    res.cookie("token",token,{expire : new Date() + 999});
+    const {_id,name,email,role} =oldUser;
+    return res.json({token,user : {_id,name,email,role}}) 
+}
 
 exports.signin = (req,res)=>{
     // const {email,password} = req.body;
-
+    console.log("inside signin controller",myprofile.id)
      User.findOne({'_id': myprofile.id},(err,user)=>{
          if(err || !user){ 
             return res.status(400).json({
              error : "User email is not present in database"
              })
-      }
-      
-     //  if(!user.authenticate(password)){
-     //     return res.status(400).json({
-     //          error : "Email and password do not match"
-     //      })
-     //  }
-     
-      // Save Token
-     //  var token = accesstoken
-      
-     //  res.cookie("token",token,{expire : new Date() + 999}); 
-         
-     //  const {googleId,name,email,role} =user;
-      
-     //  return res.json({token,user : {googleId,name,email,role}})
+         }
+         console.log(user)
      const token = jwt.sign({_id : user._id},JWT_SECRET)
-      
      res.cookie("token",token,{expire : new Date() + 999}); 
-        
      const {_id,name,email,role} =user;
-     
      return res.json({token,user : {_id,name,email,role}})
- 
- 
- 
      })
  }
 
@@ -185,6 +179,8 @@ exports.isSignedIn = expressJwt({
 
 // custom middlewares
 exports.isAuthenticated = (req,res,next)=>{
+    //console.log("auth: ",req.auth)
+    //console.log("profile: ",req.profile)
     let permission = req.profile && req.auth && req.profile._id == req.auth._id;
     if(!permission){
       return res.status(403).json({

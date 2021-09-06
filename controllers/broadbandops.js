@@ -14,7 +14,7 @@ exports.buynewbroadband = (req,res) =>{
     var request = new BroadbandRequest({
         "user" : req.profile._id,
         "broadband" : req.broadband._id,
-        "address" : req.body.address,
+        "address" : req.body.Address,
         "amount" : amountcalc,
         "plantype" : req.broadband.plantype,
         "dueamount" :0,
@@ -25,6 +25,7 @@ exports.buynewbroadband = (req,res) =>{
 
     request.save((err,requestdata)=>{
         if(err){
+            console.log(err)
             return res.status(404).json({
                 error : "Buy broadband request failed"
             })
@@ -39,7 +40,7 @@ exports.buynewbroadband = (req,res) =>{
                 price: requestdata.amount,
                 cardnumber : req.paymentcard.cardnumber,
                 expirydate : req.paymentcard.expirydate,
-                cvv : req.body.cvv
+                cvv : req.body.CVV
             })
         }
 

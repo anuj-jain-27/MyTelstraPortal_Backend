@@ -41,22 +41,20 @@ exports.createPost = (req,res) => {
     })
 }
 // working
-exports.updatePost = (req,res) => {
-    const postmessage = req.postmessage;
-    postmessage.plan = req.body.plan;
-    postmessage.validity = req.body.validity;
-    postmessage.data = req.body.data;
-    postmessage.SMS = req.body.SMS;
-    postmessage.cost= req.body.cost;
-    postmessage.save((err,updatedPost)=>{
-        if(err){
-            console.log(err)
-            return res.status(400).json({
-                error : "Failed to update plan in database"
-            })
+exports.updatePost = (req,res)=>{
+    PostMessage.findOneAndUpdate(
+        {_id : req.postmessage._id},
+        {$set : req.body},
+        {new: true},
+        (err,post) =>{
+            if(err){
+                return res.status(400).json({
+                    error : "Error while updating plans"
+                })
+            }
+            res.json(post);
         }
-        res.json(updatedPost)
-    })
+    )
 }
 
 //working

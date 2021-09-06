@@ -15,7 +15,7 @@ const postSchema = new mongoose.Schema({
     data : {
         type : Number,
         trim : true,
-        required : true,
+       required : true,
         maxlength : 32
     },
     SMS: {

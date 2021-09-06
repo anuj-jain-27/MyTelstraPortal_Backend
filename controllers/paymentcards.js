@@ -25,6 +25,7 @@ exports.getAllUserCards = (req,res)=>{
 }
 
 exports.addUserCards =(req,res) =>{
+    console.log(req.body)
     var card = new PaymentCard({
         ...req.body,
         "userId" : req.profile._id

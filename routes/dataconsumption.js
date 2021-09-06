@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-//const {isAdmin,isAuthenticated,isSignedIn} = require("../controllers/auth")
+const {isAdmin,isAuthenticated,isSignedIn} = require("../controllers/auth")
 const {getAllDatas, getDataConsumptionById, getData, createData} = require("../controllers/dataconsumption")
 
 router.param("dataid",getDataConsumptionById);
